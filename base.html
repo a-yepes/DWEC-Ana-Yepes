@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Practica JS Ana Yepes</title>
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <main>
+      <h1>Registro de Jugador</h1>
+
+      <!-- Campos de texto y fecha: es un formulario -->
+      <form id="form-jugador">
+        <label for="nombre">Nombre del jugador:</label>
+        <input type="text" id="nombre" required />
+
+        <br /><br />
+
+        <label for="fecha-nacimiento">Fecha de nacimiento:</label>
+        <!-- Usamos un input tipo date para validar la fecha -->
+        <input type="date" id="fecha-nacimiento" required />
+
+        <br /><br />
+
+        <button type="submit" id="btn-jugar">Comenzar Juego</button>
+      </form>
+    </main>
+  </body>
+</html>
