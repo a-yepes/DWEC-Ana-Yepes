@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -25,6 +25,13 @@
 
         <button type="submit" id="btn-jugar">Comenzar Juego</button>
       </form>
+      <p id="mensaje" role="status"></p> <!--Para mostrar mensajes al usuario sin usar alert()-->
+
+      <section id="panel-juego" hidden> <!--Contenedor del juego. Lo empiezo en hidden para que solo se vea el formulario de registro. Cuando los datos sean válidos ya aparece-->
+        <h2>Tu aventura</h2>
+        <div id="perfil"></div>
+        <div id="contenido-juego"></div>
+      </section>
     </main>
   </body>
 </html>
