@@ -96,7 +96,8 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        //Perfil personalizado
+        //Perfil personalizado:
+
         //Formateamos el nombre para que la primera letra sea mayúscula y el resto minúscula
         const nombreFormateado = nombre.charAt(0).toUpperCase() + nombre.slice(1).toLowerCase();
 
@@ -119,7 +120,84 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log("Jugador registrado:", nombreFormateado);
 
 
+    });
+
+    // Función para generar el número secreto
+    function generarNumeroSecreto() {
+      numeroSecreto= Math.floor(Math.random() * 10) + 1; // Número aleatorio entre 1 y 100
+    }
+
+    // Cuando pulse el botón para adivinar el juego
+    botonAdivinar.addEventListener("click", function () {
+
+      const numeroTexto= campoNumero.value;
+      //comprobamos que no esté vacío
+      if (numeroTexto === "") {
+        mensajeJuego.textContent = "Escribe un número.";
+        return;
+      }
+
+      const numero = Number(numeroTexto);
+
+      // Comprobamos que el numero sea 0-10
+         if (isNaN(numero) || numero < 1 || numero > 10 || numero !== Math.floor(numero)) {
+
+            mensajeJuego.textContent = "Introduce un número entero entre 1 y 10.";
+            return;
+        }
+
+      //Comprobamos si ha acertado
+       if (numero === numeroSecreto) {
+
+            puntuacion = puntuacion + 10;
+
+            mensajeJuego.textContent = "¡Correcto! Has ganado 10 puntos.";
+       }
+       else{puntuacion = puntuacion - 2;
+
+            mensajeJuego.textContent = "No has acertado. Pierdes 2 puntos.";
+
+            // Si el número secreto es mayor o menor
+            if (numeroUsuario < numeroSecreto) {
+
+                mensajeJuego.textContent =
+                    mensajeJuego.textContent + " Prueba con uno mayor.";
+
+            } else {
+
+                mensajeJuego.textContent =
+                    mensajeJuego.textContent + " Prueba con uno menor.";
+            }
+        }
+        // Para que la puntuación no sea negativa
+        if (puntuacion < 0) {
+            puntuacion = 0;
+        }
+
+         puntuacionHTML.textContent = puntuacion;
+
+          // Guardamos el intento en el array
+        historial.push("Has elegido " + numeroUsuario +". Puntuación: " + puntuacion);
+
+        // Mostramos el historial en forma de lista
+        historialHTML.innerHTML = "";
+
+        for (let i = 0; i < historial.length; i++) {
+
+            historialHTML.innerHTML =historialHTML.innerHTML +"<li>" + historial[i] + "</li>"; 
+        }
+
+        // Limpiamos el campo para el siguiente intento
+        campoNumero.value = "";
 
     });
+
+
+
+        
+
+       
+
+
 
 });
