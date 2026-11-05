@@ -18,7 +18,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const mensajeJuego = document.getElementById("mensaje-juego");
     const puntuacionHTML = document.getElementById("puntuacion");
-    const recordHTML = document.getElementById("record");
     const historialHTML = document.getElementById("historial");
 
     let puntuacion = 0;
@@ -121,6 +120,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     });
+    //AQUI EMPIEZA EL JUEGO
 
     // Función para generar el número secreto
     function generarNumeroSecreto() {
