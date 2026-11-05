@@ -1,98 +1,86 @@
-//CARGAR FORMULARIO
-document.addEventListener("DOMContentLoaded", function () { //DOMContentLoaded permite esperar a que el documento este analizado
-  console.log("Aventura JavaScript está preparada");
 
-  const formulario = document.getElementById("form-jugador");
-  const mensaje = document.getElementById("mensaje");
+document.addEventListener("DOMContentLoaded", function () {
 
-  formulario.addEventListener("submit", function (evento) {
-    evento.preventDefault(); //preventDefault evita que el formulario recargue la página al enviarse
-    mensaje.textContent = "¡Listo!";
-  });
-});
+    // Accedemos a los elementos del HTML.
+    const campoNombre = document.getElementById("nombre");
+    const campoFecha = document.getElementById("fecha-nacimiento");
+    const botonJugar = document.getElementById("btn-jugar");
+    const mensaje = document.getElementById("mensaje");
 
-//COMPROBAR DATOS Y EDAD MINIMA
-document.addEventListener("DOMContentLoaded", function () {//espero a que cargue el html(por el defer de <script></script>)
-  const formulario = document.getElementById("form-jugador");
-  const campoNombre = document.getElementById("nombre");
-  const campoFecha = document.getElementById("fecha-nacimiento");
-  const mensaje = document.getElementById("mensaje");
+    // Edad mínima para poder jugar.
+    const EDAD_MINIMA = 12;
 
-  const EDAD_MINIMA = 12;
+    // Función para calcular la edad.
+    function calcularEdad(fechaNacimiento) {
 
-  // Evitar que se seleccionen fechas posteriores a la actual
-  const hoy = new Date();
-  const fechaMaxima = [
-    hoy.getFullYear(),
-    String(hoy.getMonth() + 1).padStart(2, "0"),// pongo +1 porque los meses empiezan en 0
-    String(hoy.getDate()).padStart(2, "0")//padstart rellena con 0 a la izquierda si es necesario para que tenga 2 dígitos
-  ].join("-");//metodo de arrays para unir usando -
+        const hoy = new Date();
 
-  campoFecha.max = fechaMaxima;
-//CALCULAR LA EDAD (año actual-año nacimiento) y si no ha cumplido años en este año todavía, -1
-  function calcularEdad(fechaNacimiento) {
-    const hoy = new Date();
-    let edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
+        let edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
 
-    const faltaCumpleaños = //lo hago en constante porque siempre lo voy a calcular asi
-      hoy.getMonth() < fechaNacimiento.getMonth() ||
-      (hoy.getMonth() === fechaNacimiento.getMonth() &&
-       hoy.getDate() < fechaNacimiento.getDate());
+        // Comprobamos si todavía no ha cumplido años.
+        if (hoy.getMonth() < fechaNacimiento.getMonth() || (hoy.getMonth() === fechaNacimiento.getMonth() && hoy.getDate() < fechaNacimiento.getDate())) {
+            edad = edad - 1;
+        }
 
-    if (faltaCumpleaños) { 
-      edad--;
+        return edad;
     }
 
-    return edad;
-  }
-  //cuando el usuario envíe el formulario, se ejecuta esta función(comprueba datos y calcula edad):
-  formulario.addEventListener("submit", function (evento) {
-    evento.preventDefault();//para que la pagina no se recargue al enviar el formulario
+    // Evento que se ejecuta al pulsar el botón.
+    botonJugar.addEventListener("click", function () {
 
-    const nombre = campoNombre.value.trim();
-    const fechaTexto = campoFecha.value;//se recoge como cadena de texto en formato "YYYY-MM-DD"
+        const nombre = campoNombre.value.trim();
+        const fechaTexto = campoFecha.value;
 
-    //valido que no esté vacío nombre y fecha
-    if (nombre === "" || fechaTexto === "") {
-      mensaje.textContent = "Acceso denegado";//modifico el parrafo del HTML con id=mensaje
-      return;
-    }
+        // Comprobamos que los campos no estén vacíos.
+        if (nombre === "" || fechaTexto === "") {
 
-    // Convierto el texto en fecha
-    const partes = fechaTexto.split("-").map(Number);
-    const fechaNacimiento = new Date(
-      partes[0], partes[1] - 1, partes[2] //año-mes-dia: como mes empieza desde 0 pongo -1
-    );
+            mensaje.textContent = "Acceso denegado";
+            return;
+        }
 
-    // Comprobar que la fecha es válida
-    const fechaValida =
-      fechaNacimiento.getFullYear() === partes[0] && //getFullYear() devuelve el año actual
-      fechaNacimiento.getMonth() === partes[1] - 1 &&
-      fechaNacimiento.getDate() === partes[2];
+        // Separamos el año, el mes y el día.
+        const partesFecha = fechaTexto.split("-");
 
-    const fechaActual = new Date();//crea un objeto con la fecha y hora actuales
-    fechaActual.setHours(0, 0, 0, 0);//modifico la hora a las 00:00 para comprobar solo fechas y no horas
-    //valido fecha
-    if (
-      !fechaValida ||
-      fechaNacimiento >= fechaActual
-    ) {
-      mensaje.textContent = "Acceso denegado";
-      return;
-    }
+        const año = Number(partesFecha[0]);
+        const mes = Number(partesFecha[1]);
+        const dia = Number(partesFecha[2]);
 
-    const edad = calcularEdad(fechaNacimiento);//llamo a la función de antes para calcular la edad a partir de la fecha de nacimiento
+        // Creamos el objeto Date.
+        const fechaNacimiento = new Date(año, mes - 1, dia);
 
-    if (edad < EDAD_MINIMA) {
-      mensaje.textContent =
-        "Acceso denegado. Debes tener al menos " + EDAD_MINIMA + " años.";
-      return;
-    }
+        // Comprobamos que la fecha exista.
+        if (fechaNacimiento.getFullYear() !== año || fechaNacimiento.getMonth() !== mes - 1 || fechaNacimiento.getDate() !== dia) {
+          mensaje.textContent = "Acceso denegado";
+          return;
+        }
 
-    mensaje.textContent =
-      "¡Hola, "+nombre+" !";
-    //Muestro por pantalla
-    console.log("Jugador:", nombre);
-    console.log("Edad:", edad);
-  });
+        // Comprobamos que la fecha sea anterior a hoy.
+        const fechaActual = new Date();
+
+        fechaActual.setHours(0, 0, 0, 0);
+
+        if (fechaNacimiento >= fechaActual) {
+
+            mensaje.textContent = "Acceso denegado";
+            return;
+        }
+
+        // Calculamos la edad.
+        const edad = calcularEdad(fechaNacimiento);
+
+        // Comprobamos la edad mínima.
+        if (edad < EDAD_MINIMA) {
+
+            mensaje.textContent = "Acceso denegado. Debes tener al menos 12 años.";
+
+            return;
+        }
+
+        mensaje.textContent ="Registro correcto. Bienvenido/a, " + nombre;
+
+        console.log("Nombre:", nombre);
+        console.log("Edad:", edad);
+
+    });
+
 });
