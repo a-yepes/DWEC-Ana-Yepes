@@ -1,7 +1,7 @@
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    // Accedemos a los elementos del HTML
+    // Accedemos a los elementos del HTML 
     const campoNombre = document.getElementById("nombre");
     const campoFecha = document.getElementById("fecha-nacimiento");
     const botonJugar = document.getElementById("btn-jugar");
@@ -11,6 +11,20 @@ document.addEventListener("DOMContentLoaded", function () {
     const registro = document.getElementById("registro");
     const panelJuego = document.getElementById("panel-juego");
     const perfil = document.getElementById("perfil");
+
+    //Variables para el juego
+    const campoNumero = document.getElementById("numero");
+    const botonAdivinar = document.getElementById("btn-adivinar");
+
+    const mensajeJuego = document.getElementById("mensaje-juego");
+    const puntuacionHTML = document.getElementById("puntuacion");
+    const recordHTML = document.getElementById("record");
+    const historialHTML = document.getElementById("historial");
+
+    let puntuacion = 0;
+    let numeroSecreto = 0;
+    let historial = [];
+
 
 
     // Edad mínima para poder jugar
