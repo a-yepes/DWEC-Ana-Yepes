@@ -1,16 +1,14 @@
-Idea inicial del juego:
-1. Registro del jugador
+# 🎮 Aventura JavaScript
 
-Introduce su nombre y fecha de nacimiento. Si los datos son incorrectos o tiene menos de 12 años, no puede acceder.
+El juego permite registrar a un jugador y participar en una aventura en la que hay que adivinar un número secreto.
 
-2. Perfil personalizado
+## 🚀 ¿Cómo funciona?
 
-Aparece su nombre y su edad
+1. El jugador introduce su nombre y su fecha de nacimiento.
+2. Se comprueba que los datos sean correctos y que tenga al menos 12 años.
+3. Si cumple los requisitos, aparece su perfil personalizado.
+4. Comienza el juego de adivinar un número del 1 al 10.
+5. Cada acierto suma 10 puntos y cada fallo resta 2 puntos.
+6. Se muestra la puntuación y el historial de intentos.
+7. También se guarda el récord conseguido.
 
-3. Misiones y puntos
-Se propondrán distintos minijuegos al usuario y tendrá que resolverlos para avanzar y ganar puntos.
-Por ejemplo, el juego piensa un número entre 1 y 10. Si lo adivinas, ganas 10 puntos; si fallas, pierdes 2. 
-
-5. Récord y ayuda
-
-Puedes consultar el historial de misiones, abrir una ventana con tus estadísticas y conservar tu récord para futuras visitas.
