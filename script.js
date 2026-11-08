@@ -227,11 +227,9 @@ document.addEventListener("DOMContentLoaded", function () {
     campoNumero.value = "";
   });
 
-
-
   // Creamos la ventana de ayuda con las instrucciones.
 
-  botonAyuda.addEventListener("click", function () {
+  botonAyuda.onclick = () => { //onclick para que el navegador no bloquee la ventana emergente
     const ventanaAyuda = window.open(
       "",
       "ventanaAyuda",
@@ -246,8 +244,5 @@ document.addEventListener("DOMContentLoaded", function () {
         "<p>Si fallas, pierdes 2 puntos.</p>" +
         "<p>¡Mucha suerte!</p>";
     }
-    
-  });
-
-
+  };
 });
