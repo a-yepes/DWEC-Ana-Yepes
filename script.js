@@ -25,6 +25,9 @@ document.addEventListener("DOMContentLoaded", function () {
     let numeroSecreto = 0;
     let historial = [];
 
+    // Botón de ayuda
+    const botonAyuda = document.getElementById("btn-ayuda");
+
 
     
     //Recuperamos el récord de localStorage (almacena en navegador. Conserva datos aunque cierre la pagina)
@@ -36,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     recordHTML.textContent = record; //muestro en HTML
 
-    
+
 
     // Edad mínima para poder jugar
     const EDAD_MINIMA = 12;
