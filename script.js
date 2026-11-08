@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", function () {
 
     // Accedemos a los elementos del HTML 
@@ -20,11 +19,24 @@ document.addEventListener("DOMContentLoaded", function () {
     const puntuacionHTML = document.getElementById("puntuacion");
     const historialHTML = document.getElementById("historial");
 
+
+    const recordHTML = document.getElementById("record");
     let puntuacion = 0;
     let numeroSecreto = 0;
     let historial = [];
 
 
+    
+    //Recuperamos el récord de localStorage (almacena en navegador. Conserva datos aunque cierre la pagina)
+    let record = Number(localStorage.getItem("record")); //localStorage devuelve un string, por eso lo convertimos a número
+
+    if (isNaN(record)) { //si todavia no hay un record guardado, localStorage devuelve null, y Number(null) es NaN. Por eso comprobamos si es NaN y en ese caso inicializamos a 0
+        record = 0;
+    }
+
+    recordHTML.textContent = record; //muestro en HTML
+
+    
 
     // Edad mínima para poder jugar
     const EDAD_MINIMA = 12;
@@ -100,6 +112,15 @@ document.addEventListener("DOMContentLoaded", function () {
         //Formateamos el nombre para que la primera letra sea mayúscula y el resto minúscula
         const nombreFormateado = nombre.charAt(0).toUpperCase() + nombre.slice(1).toLowerCase();
 
+    
+        // Guardamos el nombre en una COOKIE.
+        document.cookie =
+            "jugador=" + encodeURIComponent(nombreFormateado) + "; max-age=604800; path=/; "; //guarda 7 dias (604800 segundos) y path=/ para que sea accesible desde cualquier página del sitio
+
+        // Guardamos con sessionStorage para que se mantenga mientras dure la sesión
+        sessionStorage.setItem("nombreJugador", nombreFormateado);
+    
+
         // Mostramos el perfil personalizado
         perfil.textContent= "¡Hola, " + nombreFormateado + "!" + " Tienes " + edad + " años.";
 
@@ -113,6 +134,9 @@ document.addEventListener("DOMContentLoaded", function () {
          // Ocultamos el registro y mostramos el juego.
         registro.hidden = true;
         panelJuego.hidden = false;
+
+        // Generamos el número secreto al iniciar el juego
+        generarNumeroSecreto();
 
         mensaje.textContent = "";
 
@@ -158,7 +182,7 @@ document.addEventListener("DOMContentLoaded", function () {
             mensajeJuego.textContent = "No has acertado. Pierdes 2 puntos.";
 
             // Si el número secreto es mayor o menor
-            if (numeroUsuario < numeroSecreto) {
+            if (numero < numeroSecreto) {
 
                 mensajeJuego.textContent =
                     mensajeJuego.textContent + " Prueba con uno mayor.";
@@ -173,11 +197,25 @@ document.addEventListener("DOMContentLoaded", function () {
         if (puntuacion < 0) {
             puntuacion = 0;
         }
+        // Actualizamos la puntuación en el HTML
+        puntuacionHTML.textContent = puntuacion;
 
-         puntuacionHTML.textContent = puntuacion;
+         // Guardamos la puntuación del jugador (creando COOKIES)
+        localStorage.setItem("puntuacion", puntuacion); //localStorage se mantiene aunque cierres la página,sessionStorage se borra al cerrar la pestaña
 
-          // Guardamos el intento en el array
-        historial.push("Has elegido " + numeroUsuario +". Puntuación: " + puntuacion);
+        //Comprobamos si hemos superado el récord
+        if (puntuacion > record) {
+
+            record = puntuacion;
+
+            localStorage.setItem("record", record);//guardamos el nuevo record. Lo usamos arriba con getItem para recuperarlo al iniciar el juego (despues de las variables)
+
+            recordHTML.textContent = record;
+        }
+
+
+        // Guardamos el intento en el array
+        historial.push("Has elegido " + numero +". Puntuación: " + puntuacion);
 
         // Mostramos el historial en forma de lista
         historialHTML.innerHTML = "";
