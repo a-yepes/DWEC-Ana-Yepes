@@ -245,4 +245,6 @@ document.addEventListener("DOMContentLoaded", function () {
         "<p>¡Mucha suerte!</p>";
     }
   };
+
+  
 });
