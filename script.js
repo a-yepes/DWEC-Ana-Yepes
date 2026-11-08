@@ -133,9 +133,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     //Cambio de estilo según la edad
     if (edad >= 18) {
-      panelJuego.style.backgroundColor = "lightblue";
+      panelJuego.style.backgroundColor = "#DDA0DD";
     } else {
-      panelJuego.style.backgroundColor = "lightgreen";
+      panelJuego.style.backgroundColor = "#FFF0F5";
     }
 
     // Ocultamos el registro y mostramos el juego.
