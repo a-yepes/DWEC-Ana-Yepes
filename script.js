@@ -1,4 +1,7 @@
+
 document.addEventListener("DOMContentLoaded", function () {
+    
+
   // Accedemos a los elementos del HTML
   const campoNombre = document.getElementById("nombre");
   const campoFecha = document.getElementById("fecha-nacimiento");
@@ -57,8 +60,9 @@ document.addEventListener("DOMContentLoaded", function () {
     return edad;
   }
 
-  // Al pulsar el botón, validamos los campos y calculamos la edad.
+  // Botón para iniciar el juego. Al pulsar el botón, validamos los campos y calculamos la edad.
   botonJugar.addEventListener("click", function () {
+    event.preventDefault(); //añadimos esto para que no recargue la página al pulsar el botón, ya que es un submit en html 
     const nombre = campoNombre.value.trim();
     const fechaTexto = campoFecha.value;
 
@@ -246,5 +250,5 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   };
 
-  
+
 });
