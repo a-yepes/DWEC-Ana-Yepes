@@ -24,12 +24,16 @@ const cientifico = {
 
     // Método del objeto
     mostrarInformacion: function() {
-        return `El cientifico ${this.nombre} tiene ${this.edad} años.`; //this hace referencia al objeto cientifico
+       return `Nombre: ${this.nombre}
+            Edad: ${this.edad} años
+            Profesión: ${this.profesion}
+            Estado: ${this.activo ? "Activo" : "Inactivo"}`; //this hace referencia al objeto cientifico
     },
 
     // Otro método
     mostrarLaboratorio: function() {
-        return `Trabaja en ${this.laboratorio.nombre}.`; //this hace referencia al objeto laboratorio
+        `Laboratorio: ${this.laboratorio.nombre}
+        Ubicación: ${this.laboratorio.ubicacion}`; //this hace referencia al objeto cientifico y accede al objeto laboratorio
     }
 };
 /* Mostramos datos por consola
@@ -47,12 +51,8 @@ const resultado = document.getElementById("resultado");
 
 const campoContraseña = document.getElementById("contraseña");
 
-// Investigamos la ficha del cientifico
+// BOTON INVESTIGAR :Investigamos la ficha del cientifico
 botonInvestigar.addEventListener("click", function() {
-
-    // Mostramos la informacion del objeto
-    informacion.textContent = cientifico.mostrarInformacion();
-
 
 // Creamos una copia del objeto: hay que usar spread (...) porque structuredClone() no se puede con funciones
 //spread copia el objeto, el objeto anidado y los metodos
@@ -74,8 +74,13 @@ console.log("Objeto copiado:", copiaCientifico);
 console.log("Nombre original:", cientifico.nombre);
 console.log("Nombre de la copia:", copiaCientifico.nombre);*/
 
- // Mostramos una pista al jugador
-    informacion.textContent = " Pista: la contraseña es " + copiaCientifico.laboratorio.codigoSecreto.length + " letras y es el órgano que utilizas para pensar.";
+  // Mostramos los datos del científico y del laboratorio
+    informacion.textContent =
+        cientifico.mostrarInformacion() + "\n\n" +
+        cientifico.mostrarLaboratorio() + "\n\n" +
+
+        // Mostramos una pista al jugador
+        "PISTA: La contraseña tiene " + copiaCientifico.laboratorio.codigoSecreto.length + " letras y es el órgano que utilizas para pensar.";
 
 });
 
