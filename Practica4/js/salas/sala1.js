@@ -19,7 +19,7 @@ const cientifico = {
     laboratorio: {
         nombre: "Laboratorio Central",
         ubicacion: "Planta subterranea",
-        codigoSecreto: "CEREBRO"
+        codigoSecreto: "OCULTO"
     },
 
     // Método del objeto
@@ -32,12 +32,26 @@ const cientifico = {
         return `Trabaja en ${this.laboratorio.nombre}.`; //this hace referencia al objeto laboratorio
     }
 };
-
-// Mostramos datos por consola
+/* Mostramos datos por consola
 console.log(cientifico.nombre);
 console.log(cientifico.edad);
 console.log(cientifico.mostrarInformacion());
-console.log(cientifico.mostrarLaboratorio());
+console.log(cientifico.mostrarLaboratorio());*/
+
+// Seleccionamos los elementos HTML
+const botonInvestigar = document.getElementById("btnInvestigar");
+const botonComprobar = document.getElementById("btnComprobar");
+
+const informacion = document.getElementById("informacion");
+const resultado = document.getElementById("resultado");
+
+const campoContraseña = document.getElementById("contraseña");
+
+// Investigamos la ficha del cientifico
+botonInvestigar.addEventListener("click", function() {
+
+    // Mostramos la informacion del objeto
+    informacion.textContent = cientifico.mostrarInformacion();
 
 
 // Creamos una copia del objeto: hay que usar spread (...) porque structuredClone() no se puede con funciones
@@ -51,14 +65,38 @@ const copiaCientifico = {
 
 //COMPROBACIONES
 
-// Modificamos la copia para comprobar que al cambiar un dato de la copia, el original no cambia
-copiaCientifico.nombre = "Victor (copia)";
+// Modificamos la copia para que en el original esté oculto, y en la pista salga este numero de letras
 copiaCientifico.laboratorio.codigoSecreto = "CEREBRO";
 
 // Comprobamos los resultados
 console.log("Objeto original:", cientifico);
 console.log("Objeto copiado:", copiaCientifico);
 
-// Comprobamos que el original no ha cambiado
+/*Comprobamos que el original no ha cambiado
 console.log("Nombre original:", cientifico.nombre);
-console.log("Nombre de la copia:", copiaCientifico.nombre);
+console.log("Nombre de la copia:", copiaCientifico.nombre);*/
+
+ // Mostramos una pista al jugador
+    informacion.textContent = " Pista: la contraseña es " + copiaCientifico.laboratorio.codigoSecreto.length + " letras y es el órgano que utilizas para pensar.";
+
+});
+
+// Comprobamos la contraseña
+botonComprobar.addEventListener("click", function() {
+
+    const respuesta = campoContraseña.value.trim().toUpperCase();
+
+    if (respuesta === "CEREBRO") {
+
+        resultado.textContent = "¡Correcto! Has abierto la caja fuerte. Puedes pasar a la siguiente sala.";
+
+        // Guardamos el progreso
+        window.location.href = "sala2.html";
+
+    } else {
+
+        resultado.textContent = "Contraseña incorrecta. Sigue investigando.";
+
+    }
+
+});
