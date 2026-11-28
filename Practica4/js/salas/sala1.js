@@ -63,8 +63,6 @@ const copiaCientifico = {
     }
 };
 
-//COMPROBACIONES
-
 // Modificamos la copia para que en el original esté oculto, y en la pista salga este numero de letras
 copiaCientifico.laboratorio.codigoSecreto = "CEREBRO";
 
