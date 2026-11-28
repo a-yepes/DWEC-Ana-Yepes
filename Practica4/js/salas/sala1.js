@@ -45,6 +45,7 @@ console.log(cientifico.mostrarLaboratorio());*/
 // Seleccionamos los elementos HTML
 const botonInvestigar = document.getElementById("btnInvestigar");
 const botonComprobar = document.getElementById("btnComprobar");
+const botonSiguienteSala = document.getElementById("btnSiguienteSala");
 
 const informacion = document.getElementById("informacion");
 const resultado = document.getElementById("resultado");
@@ -84,7 +85,7 @@ console.log("Nombre de la copia:", copiaCientifico.nombre);*/
 
 });
 
-// Comprobamos la contraseña
+// BOTON COMPROBAR: Comprobamos la contraseña
 botonComprobar.addEventListener("click", function() {
 
     const respuesta = campoContraseña.value.trim().toUpperCase();
@@ -92,14 +93,19 @@ botonComprobar.addEventListener("click", function() {
     if (respuesta === "CEREBRO") {
 
         resultado.textContent = "¡Correcto! Has abierto la caja fuerte. Puedes pasar a la siguiente sala.";
+        botonSiguienteSala.style.display = "inline-block"; //se activa el botón para ir a la siguiente sala
 
-        // Guardamos el progreso
-        window.location.href = "sala2.html";
 
     } else {
 
         resultado.textContent = "Contraseña incorrecta. Sigue investigando.";
+        botonSiguienteSala.style.display = "none";
 
     }
 
+});
+
+// BOTON SIGUIENTE SALA: Al pulsar el nuevo botón, vamos a la siguiente sala
+botonSiguienteSala.addEventListener("click", function() {
+    window.location.href = "sala2.html";
 });
