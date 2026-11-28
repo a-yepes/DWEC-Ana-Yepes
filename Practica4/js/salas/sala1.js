@@ -1,5 +1,5 @@
-/*objeto (CIENTIFICO) con propiedades de tipos de datos simples (NOMBRE,EDAD,PROFESION) y al menos una propiedad con funciones y 
-otra con objetos anidados. Se usarán métodos de clonación de objetos (structuredClone() o spread) al menos una vez.*/
+/*objeto (CIENTIFICO) con propiedades de tipos de datos simples (NOMBRE,EDAD,PROFESION) y al menos una propiedad con funciones (MÉTODOS) y 
+otra con objetos anidados(LABORATORIO). Se usarán métodos de clonación de objetos (spread) al menos una vez.*/
 
 //Para abrir una caja fuerte: consultar datos del cientifico, investigar, copiar la ficha para sacar una pista y poner contraseña
 
