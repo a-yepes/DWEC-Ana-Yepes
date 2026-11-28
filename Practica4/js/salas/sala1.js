@@ -32,7 +32,7 @@ const cientifico = {
 
     // Otro método
     mostrarLaboratorio: function() {
-        `Laboratorio: ${this.laboratorio.nombre}
+        return `Laboratorio: ${this.laboratorio.nombre}
         Ubicación: ${this.laboratorio.ubicacion}`; //this hace referencia al objeto cientifico y accede al objeto laboratorio
     }
 };
