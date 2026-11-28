@@ -1,27 +1,34 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sala 1</title>
-</head>
+  </head>
 
-<body>
-
+  <body>
     <h1>SALA 1: EL DESPACHO DEL CIENTÍFICO</h1>
 
     <p>
-        Has conseguido entrar en el despacho del científico.
-        Sobre la mesa encuentras una ficha con información que puede ayudarte a descubrir la primera contraseña.
+      Estás en el despacho del científico Victor. Encuentras una ficha y una caja fuerte cerrada.
     </p>
 
-    <h2>Primera prueba</h2>
+    <h2>Ficha del científico</h2>
 
-    <p>Próximamente tendrás que investigar los objetos del científico.</p>
+    <button id="btnInvestigar">Investigar ficha</button>
+
+    <p id="informacion"></p>
+
+    <h2>Caja fuerte</h2>
+
+    <p>Introduce la contraseña para abrir la caja fuerte.</p>
+
+    <input type="text" id="contraseña" placeholder="Escribe la contraseña" />
+
+    <button id="btnComprobar">Abrir caja fuerte</button>
+
+    <p id="resultado"></p>
 
     <script type="module" src="js/salas/sala1.js"></script>
-
-</body>
-
+  </body>
 </html>
