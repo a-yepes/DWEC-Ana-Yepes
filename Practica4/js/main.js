@@ -6,6 +6,7 @@ const botonComenzar = document.getElementById("btnComenzar");
 botonComenzar.addEventListener("click", function() {
 
     // Accedemos a la primera sala
+    window.location.href = "js/salas/sala1.html";
     
 
 });
